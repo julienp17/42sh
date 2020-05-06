@@ -5,10 +5,6 @@
 ** Run a command from the console line interface
 */
 
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include "my.h"
 #include "builtins.h"
 #include "dict.h"
@@ -22,7 +18,7 @@ int run_commands(char const *command_line, dict_t *env)
     if (my_str_is_empty(command_line))
         return (EXIT_SUCCESS);
     commands = my_str_to_word_array(command_line, COMMAND_SEP);
-    for (unsigned int i = 0 ; commands[i] ; i++)
+    for (uint i = 0 ; commands[i] ; i++)
         status = run_command(commands[i], env);
     my_strarr_free(commands);
     return (status);
@@ -31,13 +27,21 @@ int run_commands(char const *command_line, dict_t *env)
 int run_command(char const *command, dict_t *env)
 {
     int status = 0;
+    char **and_commands = NULL;
+    char **or_commands = NULL;
 
-    if (my_str_is_empty(command))
-        return (EXIT_SUCCESS);
-    if (my_str_contains_char(command, PIPE_CHAR))
-        status = run_pipes(command, env);
-    else
-        status = execute_command(command, env);
+    // and_commands = my_str_to_word_array(command, "&&");
+    // for (uint i = 0 ; status == EXIT_SUCCESS && and_commands[i] ; i++) {
+        // or_commands = my_str_to_word_array(and_commands[i], "||");
+        // for (uint j = 0 ; or_commands[j] ; j++) {
+            if (my_str_contains_char(command, PIPE_CHAR))
+                status = run_pipes(command, env);
+            else
+                status = execute_command(command, env);
+        // }
+        // my_strarr_free(or_commands);
+    // }
+    // my_strarr_free(and_commands);
     return (status);
 }
 
