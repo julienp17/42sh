@@ -9,15 +9,22 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "my.h"
+#include "my_shell.h"
 #include "get_next_line.h"
 
 static void display_prompt(void);
 
 char *prompt(void)
 {
+    char *prompt = NULL;
+
     if (isatty(STDIN_FILENO))
         display_prompt();
-    return (get_next_line(STDIN_FILENO));
+    prompt = get_next_line(STDIN_FILENO);
+    if (prompt == NULL)
+        return (NULL);
+    prompt = reformat_command_line(prompt);
+    return (prompt);
 }
 
 static void display_prompt(void)
