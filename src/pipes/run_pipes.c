@@ -15,25 +15,23 @@
 #include "builtins.h"
 #include "my_shell.h"
 
-static int execute_pipes(char ***commands, dict_t *env);
-static int execute_piped(char ***commands, int i, dict_t *env, int pipe_fd[4]);
-static int redirect_io(char ***commands, int i, int pipe_fd[4]);
-static int swap_pipes_parent(char ***commands, int i, int pipe_fd[4]);
+static int execute_pipes(char **commands, dict_t *env);
+static int execute_piped(char **commands, int i, dict_t *env, int pipe_fd[4]);
+static int redirect_io(char **commands, int i, int pipe_fd[4]);
+static int swap_pipes_parent(char **commands, int i, int pipe_fd[4]);
 
-int run_pipes(char **command_tokens, dict_t *env)
+int run_pipes(char const *command, dict_t *env)
 {
-    char ***commands = NULL;
     int status = 0;
+    char **commands = NULL;
 
-    commands = my_word_array_to_words(command_tokens, "|");
-    if (commands == NULL)
-        return (EXIT_FAILURE);
+    commands = parse_command(command, PIPE_CHAR);
     status = execute_pipes(commands, env);
-    my_free_3d_array(commands);
+    my_strarr_free(commands);
     return (status);
 }
 
-static int execute_pipes(char ***commands, dict_t *env)
+static int execute_pipes(char **commands, dict_t *env)
 {
     int pipe_fd[4] = {0, 0, 0, 0};
     int status = EXIT_SUCCESS;
@@ -51,7 +49,7 @@ static int execute_pipes(char ***commands, dict_t *env)
     return (status);
 }
 
-static int execute_piped(char ***commands, int i, dict_t *env, int pipe_fd[4])
+static int execute_piped(char **commands, int i, dict_t *env, int pipe_fd[4])
 {
     pid_t pid = 0;
     int status = 0;
@@ -73,7 +71,7 @@ static int execute_piped(char ***commands, int i, dict_t *env, int pipe_fd[4])
     return (status);
 }
 
-static int redirect_io(char ***commands, int i, int pipe_fd[4])
+static int redirect_io(char **commands, int i, int pipe_fd[4])
 {
     if (i != 0) {
         if (dup2(pipe_fd[READ], STDIN_FILENO) < 0) {
@@ -98,7 +96,7 @@ static int redirect_io(char ***commands, int i, int pipe_fd[4])
     return (EXIT_SUCCESS);
 }
 
-static int swap_pipes_parent(char ***commands, int i, int pipe_fd[4])
+static int swap_pipes_parent(char **commands, int i, int pipe_fd[4])
 {
     if (i != 0) {
         if (close(pipe_fd[READ]) < 0 || close(pipe_fd[WRITE]) < 0) {
