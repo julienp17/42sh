@@ -20,8 +20,8 @@
     void my_strarr_free(char **arr);
     void my_free_3d_array(char ***arr);
 
-    bool my_is_alpha(char const c);
-    bool my_is_num(char const c);
+    bool my_char_is_alpha(char const c);
+    bool my_char_is_num(char const c);
     bool my_str_contains_char(char const *str, char const to_find);
     bool my_str_isalpha(char const *str);
     bool my_str_isnum(char const *str);

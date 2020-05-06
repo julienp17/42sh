@@ -9,12 +9,10 @@ CC 		= 	gcc
 
 SRC		=	my_count_char.c \
 			my_count_until_sep.c \
-			my_getnbr.c  \
 			my_int_to_strnum.c \
 			my_intlen.c \
-			my_is_alpha.c \
-			my_is_num.c \
-			my_perror.c \
+			my_char_is_alpha.c \
+			my_char_is_num.c \
 			my_putchar.c \
 			my_puterr.c  \
 			my_putstr.c  \
