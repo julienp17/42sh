@@ -8,7 +8,20 @@
 #include <stdlib.h>
 #include "my.h"
 
+static char **parse_to_word_array(char const *str, char const sep);
+
 char **my_str_to_word_array(char const *str, char const sep)
+{
+    char **arr = NULL;
+
+    arr = parse_to_word_array(str, sep);
+    for (unsigned int i = 0 ; arr[i] ; i++)
+        arr[i] = my_clean_str(arr[i]);
+    my_strarr_remove_empty(arr);
+    return (arr);
+}
+
+static char **parse_to_word_array(char const *str, char const sep)
 {
     unsigned int nb_rows = my_count_char(str, sep) + 1;
     unsigned int nb_cols = 0;

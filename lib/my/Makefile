@@ -7,11 +7,8 @@
 
 CC 		= 	gcc
 
-SRC		=	my_clean_str.c \
-			my_compute_power_rec.c \
-			my_count_char.c \
+SRC		=	my_count_char.c \
 			my_count_until_sep.c \
-			my_free_3d_array.c \
 			my_getnbr.c  \
 			my_int_to_strnum.c \
 			my_intlen.c \
@@ -42,10 +39,10 @@ SRC		=	my_clean_str.c \
 			my_strdup.c \
 			my_strdupcat.c \
 			my_strlen.c  \
+			my_clean_str.c \
 			my_strlen.c \
 			my_strncmp.c \
 			my_strnum_to_int.c \
-			my_word_array_to_words.c \
 
 OBJ		=	$(SRC:.c=.o)
 
