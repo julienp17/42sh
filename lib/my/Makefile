@@ -17,6 +17,7 @@ SRC		=	my_count_char.c \
 			my_puterr.c  \
 			my_putstr.c  \
 			my_revstr.c \
+			my_perror.c \
 			my_str_contains_char.c \
 			my_str_is_empty.c \
 			my_str_isalphanum.c \
