@@ -18,6 +18,7 @@
     #define ENV_SEP                '='
     #define PATH_SEP               ':'
     #define PIPE_CHAR              '|'
+    #define DEFAULT_PATH           "/bin:/usr/bin"
     #define HERE_DOC_PROMPT        "? "
 
     enum PIPE_END {READ, WRITE};
@@ -26,12 +27,11 @@
     int my_shell_loop(dict_t *env);
 
     char *prompt(void);
+    char *reformat_command_line(char *command_line);
+
     bool syntax_is_correct(char **args);
     bool is_special_char(char const c);
     bool is_special_token(char const *str);
-
-    char *reformat_command_line(char *command_line);
-    char **parse_command(char const *command, char const sep);
 
     int run_commands(char const *command_line, dict_t *env);
     int run_command(char const *command, dict_t *env);
