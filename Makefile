@@ -15,8 +15,9 @@ SRC			=	$(addprefix $(SRC_D), $(SRC_F))
 OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
 SRC_F		=	my_shell.c \
-				prompt/prompt.c \
 				file_control/get_next_line.c \
+				binaries/run_binary.c \
+				binaries/get_binary_path.c \
 				builtins/is_builtin.c \
 				builtins/get_builtin.c \
 				builtins/my_cd.c \
@@ -24,15 +25,15 @@ SRC_F		=	my_shell.c \
 				builtins/my_env.c \
 				builtins/my_setenv.c \
 				builtins/my_unsetenv.c \
-				redirection/redirect.c \
-				redirection/redirect_here_document.c \
-				commands/get_binary_path.c \
-				commands/reformat_command_line.c \
-				commands/run_commands.c \
-				commands/run_binary.c \
 				commands/is_special_char.c \
 				commands/check_syntax.c \
-				commands/run_pipes.c \
+				commands/parse_command.c \
+				commands/run_commands.c \
+				pipes/run_pipes.c \
+				prompt/prompt.c \
+				prompt/reformat_command_line.c \
+				redirection/redirect.c \
+				redirection/redirect_here_document.c \
 
 SRC_UT		=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT		=	$(SRC_UT:.c=.o)
@@ -50,7 +51,7 @@ SRC_UT_F	=	test_prompt.c \
 
 INC			=	-I./include
 
-CFLAGS		=	-W -Wall -Wextra -Werror $(INC) $(LDFLAGS) $(DBFLAGS)
+CFLAGS		=	-W -Wall -Wextra -Werror $(INC) $(LDFLAGS)
 
 LDFLAGS		=	-L./lib -lmy -ldict
 
@@ -65,7 +66,7 @@ NAME_UT		=	unit_tests
 all: $(NAME)
 
 $(NAME): makelib $(OBJ) $(OBJ_M)
-	$(CC) -o $(NAME) $(OBJ) $(OBJ_M) $(CFLAGS) $(DBFLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(OBJ_M) $(CFLAGS)
 
 tests_run: makelib clean $(SRC) $(OBJ_UT)
 	$(CC) -o $(NAME_UT) $(SRC) $(OBJ_UT) $(CFLAGS) $(LDFLAGS_UT)
