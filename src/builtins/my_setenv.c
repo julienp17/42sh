@@ -33,7 +33,7 @@ int my_setenv(int ac, char **av, dict_t *env)
 
 static bool check_key(char const *key)
 {
-    if (!my_is_alpha(key[0])) {
+    if (!my_char_is_alpha(key[0])) {
         my_puterr("setenv: Variable name must begin with a letter.\n");
         return (false);
     }
