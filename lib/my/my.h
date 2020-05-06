@@ -16,11 +16,12 @@
     void my_perror(char const *str, char const *opt, int const errnum);
     void my_str_rotate(char *str, int index);
     void my_strarr_rotate(char **arr, int index);
-    void my_free_2d_array(char **arr);
+    void my_strarr_free(char **arr);
     void my_free_3d_array(char ***arr);
 
     bool my_is_alpha(char const c);
     bool my_is_num(char const c);
+    bool my_str_contains_char(char const *str, char const to_find);
     bool my_str_isalpha(char const *str);
     bool my_str_isnum(char const *str);
     bool my_str_isalphanum(char const *str);
