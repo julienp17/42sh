@@ -9,6 +9,9 @@
     #define MY_SH_H_
 
     #include <stdio.h>
+    #include <stdbool.h>
+    #include <stdlib.h>
+    #include <unistd.h>
     #include <sys/types.h>
     #include "dict.h"
 
@@ -20,6 +23,8 @@
     #define PIPE_CHAR              '|'
     #define DEFAULT_PATH           "/bin:/usr/bin"
     #define HERE_DOC_PROMPT        "? "
+
+    typedef unsigned int uint;
 
     enum PIPE_END {READ, WRITE};
 
