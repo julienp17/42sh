@@ -27,8 +27,8 @@ int run_commands(char const *command_line, dict_t *env)
 int run_command(char const *command, dict_t *env)
 {
     int status = 0;
-    char **and_commands = NULL;
-    char **or_commands = NULL;
+    // char **and_commands = NULL;
+    // char **or_commands = NULL;
 
     // and_commands = my_str_to_word_array(command, "&&");
     // for (uint i = 0 ; status == EXIT_SUCCESS && and_commands[i] ; i++) {
