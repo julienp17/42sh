@@ -27,7 +27,6 @@ SRC_F		=	my_shell.c \
 				builtins/my_unsetenv.c \
 				commands/is_special_char.c \
 				commands/check_syntax.c \
-				commands/parse_command.c \
 				commands/run_commands.c \
 				pipes/run_pipes.c \
 				prompt/prompt.c \
