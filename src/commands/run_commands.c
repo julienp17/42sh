@@ -14,51 +14,48 @@
 #include "dict.h"
 #include "my_shell.h"
 
-int run_commands(char *command_line, dict_t *env)
+int run_commands(char const *command_line, dict_t *env)
 {
     int status = 0;
     char **commands = NULL;
 
-    command_line = reformat_command_line(command_line);
-    if (command_line == NULL || my_str_is_empty(command_line))
-        return ((command_line == NULL) ? EXIT_FAILURE : EXIT_SUCCESS);
-    commands = my_str_to_word_array(command_line, COMMAND_SEP);
-    if (commands == NULL)
-        return (EXIT_FAILURE);
+    if (my_str_is_empty(command_line))
+        return (EXIT_SUCCESS);
+    commands = parse_command(command_line, COMMAND_SEP);
     for (unsigned int i = 0 ; commands[i] ; i++)
         status = run_command(commands[i], env);
+    my_strarr_free(commands);
     return (status);
 }
 
-int run_command(char *command, dict_t *env)
+int run_command(char const *command, dict_t *env)
 {
-    char **args = NULL;
     int status = 0;
 
-    command = my_clean_str(command);
     if (my_str_is_empty(command))
         return (EXIT_SUCCESS);
-    args = my_str_to_word_array(command, ' ');
-    if (args == NULL || !syntax_is_correct(args))
-        return (EXIT_FAILURE);
-    if (my_strarr_contains(args, "|"))
-        status = run_pipes(args, env);
+    if (my_str_contains_char(command, PIPE_CHAR))
+        status = run_pipes(command, env);
     else
-        status = execute_command(args, env);
-    my_free_2d_array(args);
+        status = execute_command(command, env);
     return (status);
 }
 
-int execute_command(char **av, dict_t *env)
+int execute_command(char const *command, dict_t *env)
 {
     int ac = 0;
+    char **av = NULL;
     int (*execute)(int, char **, dict_t *) = NULL;
     int status = 0;
 
+    av = my_str_to_word_array(command, ' ');
+    if (syntax_is_correct(av) == false)
+        return (EXIT_FAILURE);
     for (ac = 0 ; av[ac] ; ac++);
     execute = get_builtin(av[0]);
     if (execute == NULL)
         execute = &run_binary;
     status = execute(ac, av, env);
+    my_strarr_free(av);
     return (status);
 }
