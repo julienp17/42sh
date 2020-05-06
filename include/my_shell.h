@@ -8,6 +8,7 @@
 #ifndef MY_SH_H_
     #define MY_SH_H_
 
+    #include <stdio.h>
     #include <sys/types.h>
     #include "dict.h"
 
@@ -16,6 +17,7 @@
     #define COMMAND_SEP            ';'
     #define ENV_SEP                '='
     #define PATH_SEP               ':'
+    #define PIPE_CHAR              '|'
     #define HERE_DOC_PROMPT        "? "
 
     enum PIPE_END {READ, WRITE};
@@ -27,11 +29,14 @@
     bool syntax_is_correct(char **args);
     bool is_special_char(char const c);
     bool is_special_token(char const *str);
-    char *reformat_command_line(char *command_line);
 
-    int run_commands(char *command_line, dict_t *env);
-    int run_command(char *command, dict_t *env);
-    int execute_command(char **av, dict_t *env);
+    char *reformat_command_line(char *command_line);
+    char **parse_command(char const *command, char const sep);
+
+    int run_commands(char const *command_line, dict_t *env);
+    int run_command(char const *command, dict_t *env);
+    int run_pipes(char const *command, dict_t *env);
+    int execute_command(char const *command, dict_t *env);
 
     char *get_binary_path(char *command, dict_t *env);
     int run_binary(int ac, char **av, dict_t *env);
@@ -40,5 +45,4 @@
 
     int redirect(char **args);
     int redirect_here_document(char const *here);
-    int run_pipes(char **commands, dict_t *env);
 #endif
