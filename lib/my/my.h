@@ -16,6 +16,7 @@
     void my_perror(char const *str, char const *opt, int const errnum);
     void my_str_rotate(char *str, int index);
     void my_strarr_rotate(char **arr, int index);
+    void my_strarr_remove_empty(char **arr);
     void my_strarr_free(char **arr);
     void my_free_3d_array(char ***arr);
 

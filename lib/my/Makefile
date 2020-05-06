@@ -35,6 +35,7 @@ SRC		=	my_clean_str.c \
 			my_strarr_free.c \
 			my_strarr_len.c \
 			my_strarr_rotate.c \
+			my_strarr_remove_empty.c \
 			my_strcat.c \
 			my_strcmp.c \
 			my_strcpy.c \
