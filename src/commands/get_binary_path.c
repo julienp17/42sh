@@ -32,7 +32,7 @@ char *get_binary_path(char *command, dict_t *env)
         current_path = my_strdupcat(paths[i], "/");
         current_path = my_strdupcat(current_path, command);
     }
-    my_free_2d_array(paths);
+    my_strarr_free(paths);
     return (access(current_path, X_OK) == 0 ? current_path : NULL);
 }
 

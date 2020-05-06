@@ -72,7 +72,7 @@ void execute_child(char **args, dict_t *env)
     } else {
         perror(args[0]);
     }
-    my_free_2d_array(env_arr);
+    my_strarr_free(env_arr);
     _exit(EXIT_FAILURE);
 }
 
