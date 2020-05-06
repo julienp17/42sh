@@ -13,21 +13,16 @@
 #include "my_shell.h"
 
 static bool is_relative_path(char const *command);
+static char **get_paths(dict_t *env);
 
 char *get_binary_path(char *command, dict_t *env)
 {
     char *current_path = "";
-    char *path = NULL;
     char **paths = NULL;
 
     if (is_relative_path(command))
         return (access(command, X_OK) == 0 ? command : NULL);
-    if (env == NULL)
-        return (NULL);
-    path = dict_get(env, "PATH");
-    if (path == NULL || my_str_is_empty(path))
-        return (NULL);
-    paths = my_str_to_word_array(path, PATH_SEP);
+    paths = get_paths(env);
     for (unsigned int i = 0 ; paths[i] && access(current_path, X_OK) != 0 ;i++){
         current_path = my_strdupcat(paths[i], "/");
         current_path = my_strdupcat(current_path, command);
@@ -43,4 +38,21 @@ static bool is_relative_path(char const *command)
         || (command[0] == '.' && command[1] == '/')
         || (command[0] == '.' && command[1] == '.' && command[2] == '/')
     );
+}
+
+static char **get_paths(dict_t *env)
+{
+    char *path = NULL;
+    char **paths = NULL;
+
+    if (env == NULL) {
+        path = my_strdup(DEFAULT_PATH);
+    } else {
+        path = my_strdup(dict_get(env, "PATH"));
+        if (path == NULL)
+            path = my_strdup(DEFAULT_PATH);
+    }
+    paths = my_str_to_word_array(path, PATH_SEP);
+    free(path);
+    return (paths);
 }
