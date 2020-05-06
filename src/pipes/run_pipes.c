@@ -25,7 +25,7 @@ int run_pipes(char const *command, dict_t *env)
     int status = 0;
     char **commands = NULL;
 
-    commands = parse_command(command, PIPE_CHAR);
+    commands = my_str_to_word_array(command, PIPE_CHAR);
     status = execute_pipes(commands, env);
     my_strarr_free(commands);
     return (status);

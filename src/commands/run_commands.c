@@ -21,7 +21,7 @@ int run_commands(char const *command_line, dict_t *env)
 
     if (my_str_is_empty(command_line))
         return (EXIT_SUCCESS);
-    commands = parse_command(command_line, COMMAND_SEP);
+    commands = my_str_to_word_array(command_line, COMMAND_SEP);
     for (unsigned int i = 0 ; commands[i] ; i++)
         status = run_command(commands[i], env);
     my_strarr_free(commands);
