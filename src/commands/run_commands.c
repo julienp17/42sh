@@ -30,18 +30,18 @@ int run_command(char const *command, dict_t *env)
     char **and_commands = NULL;
     char **or_commands = NULL;
 
-    // and_commands = my_str_to_word_array(command, "&&");
-    // for (uint i = 0 ; status == EXIT_SUCCESS && and_commands[i] ; i++) {
-        // or_commands = my_str_to_word_array(and_commands[i], "||");
-        // for (uint j = 0 ; or_commands[j] ; j++) {
+    and_commands = my_str_to_word_array_str_sep(command, "&&");
+    for (uint i = 0 ; status == EXIT_SUCCESS && and_commands[i] ; i++) {
+        or_commands = my_str_to_word_array_str_sep(and_commands[i], "||");
+        for (uint j = 0 ; or_commands[j] ; j++) {
             if (my_str_contains_char(command, PIPE_CHAR))
                 status = run_pipes(command, env);
             else
                 status = execute_command(command, env);
-        // }
-        // my_strarr_free(or_commands);
-    // }
-    // my_strarr_free(and_commands);
+        }
+        my_strarr_free(or_commands);
+    }
+    my_strarr_free(and_commands);
     return (status);
 }
 

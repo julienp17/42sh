@@ -24,6 +24,7 @@ SRC		=	my_count_char.c \
 			my_str_isnum.c \
 			my_str_rotate.c \
 			my_str_to_word_array.c \
+			my_str_to_word_array_str_sep.c \
 			my_strarr_contains.c \
 			my_strarr_count_until_sep.c \
 			my_strarr_count.c \
