@@ -36,8 +36,7 @@ static void display_prompt(void)
         my_puterr("Couldn't get current directory.\n");
         exit(84);
     }
-    my_putstr("\x1b[1;33m[my_sh] \x1b[38;5;27m[");
-    my_putstr(current_dir);
-    my_putstr("] \x1b[32m$\x1b[0m ");
+    printf("\x1b[1;33m[42sh] \x1b[38;5;27m[%s] \x1b[32m$\x1b[0m ", current_dir);
+    fflush(stdout);
     free(current_dir);
 }
