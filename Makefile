@@ -28,11 +28,14 @@ SRC_F		=	my_shell.c \
 				commands/is_special_char.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \
+				commands/execute_command.c \
 				pipes/run_pipes.c \
 				prompt/prompt.c \
 				prompt/reformat_command_line.c \
 				redirection/redirect.c \
 				redirection/redirect_here_document.c \
+				structures/shell/shell_create.c \
+				structures/shell/shell_destroy.c \
 
 SRC_UT		=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT		=	$(SRC_UT:.c=.o)
@@ -58,7 +61,7 @@ LDFLAGS_UT  =	-lcriterion --coverage
 
 DBFLAGS		=	-g -g3 -ggdb
 
-NAME		=	mysh
+NAME		=	42sh
 
 NAME_UT		=	unit_tests
 
