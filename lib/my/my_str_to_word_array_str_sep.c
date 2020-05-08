@@ -9,27 +9,8 @@
 #include "my.h"
 
 static char **parse_to_word_array(char const *str, char const *sep);
-
-static unsigned int my_count_str_sep(char const *str, char const *sep)
-{
-    unsigned int count = 0;
-    unsigned int sep_length = my_strlen(sep) - 1;
-
-    for (unsigned int i = 0; str[i]; i++)
-        if (my_strncmp(str + i, sep, sep_length) == 0)
-            count = count + 1;
-    return (count / 2);
-}
-
-static unsigned int my_count_until_str_sep(char const *str, char const *sep)
-{
-    unsigned int count = 0;
-    unsigned int sep_length = my_strlen(sep) - 1;
-
-    for (int i = 0; str[i] && my_strncmp(str + i, sep, sep_length) != 0; i++)
-        count++;
-    return (count);
-}
+static unsigned int my_count_str_sep(char const *str, char const *sep);
+static unsigned int my_count_until_str_sep(char const *str, char const *sep);
 
 char **my_str_to_word_array_str_sep(char const *str, char const *sep)
 {
@@ -42,6 +23,35 @@ char **my_str_to_word_array_str_sep(char const *str, char const *sep)
     return (arr);
 }
 
+static unsigned int my_count_str_sep(char const *str, char const *sep)
+{
+    unsigned int count = 0;
+    unsigned int str_len = 0;
+    unsigned int sep_len = 0;
+
+    str_len = my_strlen(str);
+    sep_len = my_strlen(sep) - 1;
+    for (unsigned int i = 0 ; i < str_len ; i++) {
+        if (my_strncmp(str + i, sep, sep_len) == 0)
+            count++;
+    }
+    return (count);
+}
+
+static unsigned int my_count_until_str_sep(char const *str, char const *sep)
+{
+    unsigned int count = 0;
+    unsigned int i = 0;
+    unsigned int str_len = 0;
+    unsigned int sep_len = 0;
+
+    str_len = my_strlen(str);
+    sep_len = my_strlen(sep) - 1;
+    for (i = 0; i < str_len && my_strncmp(str + i, sep, sep_len) != 0; i++)
+        count++;
+    return (count);
+}
+
 static char **parse_to_word_array(char const *str, char const *sep)
 {
     unsigned int nb_rows = my_count_str_sep(str, sep);
@@ -49,7 +59,7 @@ static char **parse_to_word_array(char const *str, char const *sep)
     unsigned int i = 0;
     unsigned int j = 0;
     unsigned int k = 0;
-    char **arr = malloc(sizeof(char *) * nb_rows);
+    char **arr = malloc(sizeof(char *) * (nb_rows + 2));
 
     for (i = 0 ; i < nb_rows + 1; i = i + 1, k = k + 1) {
         nb_cols = my_count_until_str_sep(str + k, sep);
