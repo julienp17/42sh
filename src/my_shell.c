@@ -13,18 +13,19 @@
 
 int my_shell(char **env)
 {
-    dict_t *dict_env = NULL;
-    int status = EXIT_SUCCESS;
+    shell_t *shell = NULL;
     int exit_code = EXIT_SUCCESS;
 
-    dict_env = dict_from_strarr(env, ENV_SEP);
-    while (status != MY_EXIT_QUIT) {
-        exit_code = status;
-        status = my_shell_loop(dict_env);
+    shell = shell_create(env);
+    if (shell == NULL)
+        return (EXIT_FAILURE);
+    while (shell->status != MY_EXIT_QUIT) {
+        exit_code = shell->status;
+        shell->status = my_shell_loop(shell->env);
     }
     if (isatty(STDIN_FILENO))
         my_putstr("exit\n");
-    dict_destroy(dict_env);
+    shell_destroy(shell);
     return (exit_code);
 }
 
