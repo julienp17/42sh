@@ -7,7 +7,7 @@
 
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "my_shell.h"
+#include "shell.h"
 #include "dict.h"
 #include "my.h"
 

@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "my_shell.h"
+#include "shell.h"
 
 Test(prompt, ls)
 {

@@ -6,7 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-#include "my_shell.h"
+#include "shell.h"
 #include "my.h"
 
 Test(reformat_command_line, no_need_to_refactor)
