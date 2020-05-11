@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "my.h"
-#include "my_shell.h"
+#include "shell.h"
 #include "get_next_line.h"
 
 static void display_prompt(void);

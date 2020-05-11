@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include "dict.h"
 #include "my.h"
-#include "my_shell.h"
+#include "shell.h"
 
 static bool is_relative_path(char const *command);
 static char **get_paths(dict_t *env);

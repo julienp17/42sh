@@ -24,4 +24,5 @@
     int my_env(int ac, char **av, dict_t *env);
     int my_setenv(int ac, char **av, dict_t *env);
     int my_unsetenv(int ac, char **av, dict_t *env);
+    int my_alias(int ac, char **av, dict_t *alias);
 #endif

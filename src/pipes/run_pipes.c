@@ -13,7 +13,7 @@
 #include "dict.h"
 #include "my.h"
 #include "builtins.h"
-#include "my_shell.h"
+#include "shell.h"
 
 static int execute_pipes(char **commands, dict_t *env);
 static int execute_piped(char **commands, int i, dict_t *env, int pipe_fd[4]);

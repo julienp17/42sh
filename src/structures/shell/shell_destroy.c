@@ -5,7 +5,7 @@
 ** Free a shell structure
 */
 
-#include "my_shell.h"
+#include "shell.h"
 
 void shell_destroy(shell_t *shell)
 {

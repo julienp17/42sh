@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "my_shell.h"
+#include "shell.h"
 #include "my.h"
 
 int main(int ac, char **av, char **env)

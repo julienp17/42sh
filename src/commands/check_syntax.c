@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "my.h"
-#include "my_shell.h"
+#include "shell.h"
 
 static bool redirection_symbols_are_correct(char **args);
 static bool pipes_are_correct(char **args);

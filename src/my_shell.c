@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "my_shell.h"
+#include "shell.h"
 #include "dict.h"
 #include "my.h"
 

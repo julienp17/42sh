@@ -16,7 +16,7 @@
 #include <signal.h>
 #include "dict.h"
 #include "my.h"
-#include "my_shell.h"
+#include "shell.h"
 
 static int execute_binary(char **args, dict_t *env);
 

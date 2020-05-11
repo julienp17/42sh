@@ -6,7 +6,7 @@
 */
 
 #include "my.h"
-#include "my_shell.h"
+#include "shell.h"
 
 shell_t *shell_create(char **env)
 {

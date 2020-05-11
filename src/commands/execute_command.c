@@ -7,7 +7,7 @@
 
 #include "my.h"
 #include "builtins.h"
-#include "my_shell.h"
+#include "shell.h"
 
 int execute_command(char const *command, dict_t *env)
 {

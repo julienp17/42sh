@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "my.h"
-#include "my_shell.h"
+#include "shell.h"
 
 static unsigned int get_expected_len(char const *command_line);
 static char *get_reformatted_command_line(char const *command_line,

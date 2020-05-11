@@ -11,7 +11,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include "my.h"
-#include "my_shell.h"
+#include "shell.h"
 #include "get_next_line.h"
 
 static int prompt_child(char const *here, int pipefd[2]);

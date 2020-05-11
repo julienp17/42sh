@@ -5,7 +5,7 @@
 ** Parse the command line into several smaller segments
 */
 
-#include "my_shell.h"
+#include "shell.h"
 #include "my.h"
 
 static int run_separators(char const *command, dict_t *env);

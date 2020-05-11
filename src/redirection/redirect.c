@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "my.h"
-#include "my_shell.h"
+#include "shell.h"
 #include "get_next_line.h"
 #include "my.h"
 
