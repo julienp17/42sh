@@ -16,8 +16,7 @@ int my_exit(int ac, char **av, shell_t *shell)
         my_puterr("exit: Expression Syntax.\n");
         return (EXIT_FAILURE);
     }
-    shell->exit = true;
     if (av[1])
-        return (my_strnum_to_int(av[1]));
-    return (0);
+        exit(my_strnum_to_int(av[1]));
+    exit(0);
 }
