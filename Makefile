@@ -28,7 +28,7 @@ SRC_F		=	my_shell.c \
 				commands/is_special_char.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \
-				commands/execute_command.c \
+				commands/run_command.c \
 				pipes/run_pipes.c \
 				prompt/prompt.c \
 				prompt/reformat_command_line.c \
