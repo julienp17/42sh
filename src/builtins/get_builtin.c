@@ -11,9 +11,9 @@
 #include "my.h"
 #include "builtins.h"
 
-int (*get_builtin(char const *command))(int, char **, dict_t *)
+int (*get_builtin(char const *command))(int, char **, shell_t *)
 {
-    int (*builtin)(int, char **, dict_t *) = NULL;
+    int (*builtin)(int, char **, shell_t *) = NULL;
     builtin_t builtins[] = {
         {"cd", &my_cd}, {"exit", &my_exit},
         {"env", &my_env}, {"setenv", &my_setenv}, {"unsetenv", &my_unsetenv},

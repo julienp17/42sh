@@ -6,18 +6,18 @@
 */
 
 #include <stdlib.h>
-#include "dict.h"
 #include "my.h"
+#include "shell.h"
 
 static bool check_key(char const *key);
 
-int my_setenv(int ac, char **av, dict_t *env)
+int my_setenv(int ac, char **av, shell_t *shell)
 {
     char *key = NULL;
     char *value = NULL;
 
     if (ac == 1) {
-        dict_print(env);
+        dict_print(shell->env);
         return (EXIT_SUCCESS);
     } else if (ac > 3) {
         my_puterr("setenv: Too many arguments.\n");
@@ -27,7 +27,7 @@ int my_setenv(int ac, char **av, dict_t *env)
     if (!check_key(key))
         return (EXIT_FAILURE);
     value = (av[2] == NULL) ? NULL : my_strdup(av[2]);
-    dict_set(&env, key, value);
+    dict_set(&(shell->env), key, value);
     return (EXIT_SUCCESS);
 }
 

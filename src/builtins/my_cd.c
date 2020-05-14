@@ -10,12 +10,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "my.h"
-#include "dict.h"
+#include "shell.h"
 
 static char *get_path(int ac, char **av, dict_t *env);
 static int change_directory(int ac, char **av, dict_t *env);
 
-int my_cd(int ac, char **av, dict_t *env)
+int my_cd(int ac, char **av, shell_t *shell)
 {
     char *cwd = NULL;
 
@@ -24,14 +24,14 @@ int my_cd(int ac, char **av, dict_t *env)
         return (EXIT_FAILURE);
     }
     cwd = getcwd(NULL, 0);
-    if (change_directory(ac, av, env) == EXIT_FAILURE)
+    if (change_directory(ac, av, shell->env) == EXIT_FAILURE)
         return (EXIT_FAILURE);
     if (ac == 2 && my_strcmp(av[1], "-") == 0) {
         my_putstr(getcwd(NULL, 0));
         my_putchar('\n');
     }
-    dict_set(&env, "PWD", getcwd(NULL, 0));
-    dict_set(&env, "OLDPWD", cwd);
+    dict_set(&(shell->env), "PWD", getcwd(NULL, 0));
+    dict_set(&(shell->env), "OLDPWD", cwd);
     return (EXIT_SUCCESS);
 }
 

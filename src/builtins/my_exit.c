@@ -7,20 +7,17 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "dict.h"
 #include "my.h"
+#include "shell.h"
 
-int my_exit(int ac, char **av, dict_t *env)
+int my_exit(int ac, char **av, shell_t *shell)
 {
-    (void)av;
-    (void)env;
     if (ac > 2 || (ac == 2 && !my_str_isnum(av[1]))) {
         my_puterr("exit: Expression Syntax.\n");
         return (EXIT_FAILURE);
     }
-    if (isatty(0))
-        my_putstr("exit\n");
+    shell->exit = true;
     if (av[1])
-        exit(my_strnum_to_int(av[1]));
-    exit(0);
+        return (my_strnum_to_int(av[1]));
+    return (0);
 }

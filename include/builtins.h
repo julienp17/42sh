@@ -9,20 +9,19 @@
     #define SHELL_BUILTINS_H_
 
     #include <stdbool.h>
-    #include "dict.h"
+    #include "shell.h"
 
     typedef struct builtin {
         char *name;
-        int (*command)(int ac, char **av, dict_t *env);
+        int (*command)(int ac, char **av, shell_t *shell);
     } builtin_t;
 
-    bool is_builtin(char const *command);
-    int (*get_builtin(char const *command))(int, char **, dict_t *);
+    int (*get_builtin(char const *command))(int, char **, shell_t *);
 
-    int my_cd(int ac, char **av, dict_t *env);
-    int my_exit(int ac, char **av, dict_t *env);
-    int my_env(int ac, char **av, dict_t *env);
-    int my_setenv(int ac, char **av, dict_t *env);
-    int my_unsetenv(int ac, char **av, dict_t *env);
-    int my_alias(int ac, char **av, dict_t *alias);
+    int my_cd(int ac, char **av, shell_t *shell);
+    int my_exit(int ac, char **av, shell_t *shell);
+    int my_env(int ac, char **av, shell_t *shell);
+    int my_setenv(int ac, char **av, shell_t *shell);
+    int my_unsetenv(int ac, char **av, shell_t *shell);
+    int my_alias(int ac, char **av, shell_t *alias);
 #endif
