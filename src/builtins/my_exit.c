@@ -12,6 +12,7 @@
 
 int my_exit(int ac, char **av, shell_t *shell)
 {
+    (void)shell;
     if (ac > 2 || (ac == 2 && !my_str_isnum(av[1]))) {
         my_puterr("exit: Expression Syntax.\n");
         return (EXIT_FAILURE);
