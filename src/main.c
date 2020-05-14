@@ -11,10 +11,8 @@
 
 int main(int ac, char **av, char **env)
 {
-    int status = 0;
-
     (void)ac;
     (void)av;
-    status = my_shell(env);
-    return (status);
+    my_shell(env);
+    return (0);
 }
