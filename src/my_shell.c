@@ -37,7 +37,7 @@ int my_shell_loop(shell_t *shell)
         shell->exit = true;
         return (shell->status);
     }
-    status = run_commands(command_line, shell->env);
+    status = run_commands(command_line, shell);
     free(command_line);
     return (status);
 }

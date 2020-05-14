@@ -50,13 +50,13 @@
     bool is_special_char(char const c);
     bool is_special_token(char const *str);
 
-    int run_command(char const *command, dict_t *env);
-    int run_commands(char const *command_line, dict_t *env);
-    int run_pipes(char const *command, dict_t *env);
-    int execute_command(char const *command, dict_t *env);
+    int run_command(char const *command, shell_t *shell);
+    int run_commands(char const *command_line, shell_t *shell);
+    int run_pipes(char const *command, shell_t *shell);
+    int execute_command(char const *command, shell_t *shell);
 
+    int run_binary(int ac, char **av, shell_t *shell);
     char *get_binary_path(char *command, dict_t *env);
-    int run_binary(int ac, char **av, dict_t *env);
     void execute_child(char **args, dict_t *env);
     int wait_parent(pid_t child_pid);
 

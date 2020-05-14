@@ -20,13 +20,13 @@
 
 static int execute_binary(char **args, dict_t *env);
 
-int run_binary(int ac, char **av, dict_t *env)
+int run_binary(int ac, char **av, shell_t *shell)
 {
     char *binary = NULL;
     int status = 0;
 
     (void)ac;
-    binary = get_binary_path(av[0], env);
+    binary = get_binary_path(av[0], shell->env);
     if (binary == NULL) {
         my_puterr(av[0]);
         my_puterr(": Command not found.\n");
@@ -34,7 +34,7 @@ int run_binary(int ac, char **av, dict_t *env)
     }
     av[0] = my_strdup(binary);
     free(binary);
-    status = execute_binary(av, env);
+    status = execute_binary(av, shell->env);
     return (status);
 }
 

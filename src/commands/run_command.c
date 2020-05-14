@@ -9,22 +9,22 @@
 #include "builtins.h"
 #include "shell.h"
 
-int run_command(char const *command, dict_t *env)
+int run_command(char const *command, shell_t *shell)
 {
     int status = EXIT_SUCCESS;
 
     if (my_str_contains_char(command, PIPE_SEP))
-        status = run_pipes(command, env);
+        status = run_pipes(command, shell);
     else
-        status = execute_command(command, env);
+        status = execute_command(command, shell);
     return (status);
 }
 
-int execute_command(char const *command, dict_t *env)
+int execute_command(char const *command, shell_t *shell)
 {
     int ac = 0;
     char **av = NULL;
-    int (*execute)(int, char **, dict_t *) = NULL;
+    int (*execute)(int, char **, shell_t *) = NULL;
     int status = 0;
 
     av = my_str_to_word_array(command, ' ');
@@ -34,7 +34,7 @@ int execute_command(char const *command, dict_t *env)
     execute = get_builtin(av[0]);
     if (execute == NULL)
         execute = &run_binary;
-    status = execute(ac, av, env);
+    status = execute(ac, av, shell);
     my_strarr_free(av);
     return (status);
 }
