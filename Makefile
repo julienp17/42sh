@@ -18,7 +18,6 @@ SRC_F		=	my_shell.c \
 				file_control/get_next_line.c \
 				binaries/run_binary.c \
 				binaries/get_binary_path.c \
-				builtins/is_builtin.c \
 				builtins/get_builtin.c \
 				builtins/my_cd.c \
 				builtins/my_exit.c \
