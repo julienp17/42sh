@@ -49,6 +49,7 @@
     char *my_strdup(char const *src);
     char *my_strcpy(char *dest, char const *src);
     char *my_strcat(char *dest, char const *src);
+    char *my_word_array_to_str(char **arr, char const sep);
     char **my_str_to_word_array(char const *str, char const sep);
     char **my_str_to_word_array_str_sep(char const *str, char const *sep);
     char **my_strarr_dup(char **arr);

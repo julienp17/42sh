@@ -43,6 +43,7 @@ SRC		=	my_count_char.c \
 			my_strlen.c \
 			my_strncmp.c \
 			my_strnum_to_int.c \
+			my_word_array_to_str.c \
 
 OBJ		=	$(SRC:.c=.o)
 
