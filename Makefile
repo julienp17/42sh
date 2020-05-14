@@ -24,6 +24,7 @@ SRC_F		=	my_shell.c \
 				builtins/my_env.c \
 				builtins/my_setenv.c \
 				builtins/my_unsetenv.c \
+				builtins/my_alias.c \
 				commands/is_special_char.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \
