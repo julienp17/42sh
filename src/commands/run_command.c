@@ -9,6 +9,17 @@
 #include "builtins.h"
 #include "shell.h"
 
+int run_command(char const *command, dict_t *env)
+{
+    int status = EXIT_SUCCESS;
+
+    if (my_str_contains_char(command, PIPE_SEP))
+        status = run_pipes(command, env);
+    else
+        status = execute_command(command, env);
+    return (status);
+}
+
 int execute_command(char const *command, dict_t *env)
 {
     int ac = 0;
