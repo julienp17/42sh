@@ -19,25 +19,25 @@ int my_shell(char **env)
     shell = shell_create(env);
     if (shell == NULL)
         return (EXIT_FAILURE);
-    while (shell->status != MY_EXIT_QUIT) {
-        exit_code = shell->status;
-        shell->status = my_shell_loop(shell->env);
-    }
+    while (shell->exit == false)
+        shell->status = my_shell_loop(shell);
     if (isatty(STDIN_FILENO))
         my_putstr("exit\n");
     shell_destroy(shell);
     return (exit_code);
 }
 
-int my_shell_loop(dict_t *env)
+int my_shell_loop(shell_t *shell)
 {
     char *command_line = NULL;
     int status = 0;
 
     command_line = prompt();
-    if (command_line == NULL)
-        return (MY_EXIT_QUIT);
-    status = run_commands(command_line, env);
+    if (command_line == NULL) {
+        shell->exit = true;
+        return (shell->status);
+    }
+    status = run_commands(command_line, shell->env);
     free(command_line);
     return (status);
 }

@@ -20,7 +20,9 @@
     #define COMMAND_SEP            ';'
     #define ENV_SEP                '='
     #define PATH_SEP               ':'
-    #define PIPE_CHAR              '|'
+    #define PIPE_SEP               '|'
+    #define AND_SEP                "&&"
+    #define OR_SEP                 "||"
     #define DEFAULT_PATH           "/bin:/usr/bin"
     #define HERE_DOC_PROMPT        "? "
 
@@ -30,6 +32,7 @@
         int status;
         dict_t *env;
         dict_t *alias;
+        bool exit;
     } shell_t;
 
     shell_t *shell_create(char **env);
@@ -38,7 +41,7 @@
     enum PIPE_END {READ, WRITE};
 
     int my_shell(char **env);
-    int my_shell_loop(dict_t *env);
+    int my_shell_loop(shell_t *shell);
 
     char *prompt(void);
     char *reformat_command_line(char *command_line);
@@ -47,6 +50,7 @@
     bool is_special_char(char const c);
     bool is_special_token(char const *str);
 
+    int run_command(char const *command, dict_t *env);
     int run_commands(char const *command_line, dict_t *env);
     int run_pipes(char const *command, dict_t *env);
     int execute_command(char const *command, dict_t *env);
