@@ -15,15 +15,17 @@
 static bool is_relative_path(char const *command);
 static char **get_paths(dict_t *env);
 
-char *get_binary_path(char *command, dict_t *env)
+char *get_binary_path(char const *command, dict_t *env)
 {
     char *current_path = "";
     char **paths = NULL;
 
     if (is_relative_path(command))
-        return (access(command, X_OK) == 0 ? command : NULL);
+        return (access(command, X_OK) == 0 ? my_strdup(command) : NULL);
     paths = get_paths(env);
-    for (unsigned int i = 0 ; paths[i] && access(current_path, X_OK) != 0 ;i++){
+    if (paths == NULL)
+        return (NULL);
+    for (int i = 0 ; paths[i] && access(current_path, X_OK) != 0 ; i++) {
         current_path = my_strdupcat(paths[i], "/");
         current_path = my_strdupcat(current_path, command);
     }
