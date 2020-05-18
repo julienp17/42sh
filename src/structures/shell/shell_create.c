@@ -5,6 +5,7 @@
 ** Returns a newly allocated shell structure
 */
 
+#include <stdio.h>
 #include "my.h"
 #include "shell.h"
 
@@ -18,7 +19,11 @@ shell_t *shell_create(char **env)
         return (NULL);
     }
     shell->status = EXIT_SUCCESS;
-    shell->env = dict_from_strarr(env, ENV_SEP);
+    shell->env = NULL;
+    if (env == NULL || env[0] == 0)
+        dict_set(&(shell->env), "PATH", my_strdup(DEFAULT_PATH));
+    else
+        shell->env = dict_from_strarr(env, ENV_SEP);
     shell->alias = NULL;
     shell->exit = false;
     return (shell);
