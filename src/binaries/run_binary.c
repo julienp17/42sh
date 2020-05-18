@@ -48,9 +48,8 @@ void execute_child(char **av, dict_t *env)
         fprintf(stderr, "%s: Command not found.\n", av[0]);
         _exit(EXIT_FAILURE);
     }
-    av[0] = my_strdup(binary_path);
     env_arr = dict_to_strarr(env);
-    execve(av[0], av, env_arr);
+    execve(binary_path, av, env_arr);
     if (errno == ENOEXEC)
         fprintf(stderr, "%s: Exec format error. Wrong Architecture.\n", av[0]);
     else if (errno == EACCES)
