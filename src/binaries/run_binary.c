@@ -18,60 +18,46 @@
 #include "my.h"
 #include "shell.h"
 
-static int execute_binary(char **args, dict_t *env);
-
 int run_binary(int ac, char **av, shell_t *shell)
-{
-    char *binary = NULL;
-    int status = 0;
-
-    (void)ac;
-    binary = get_binary_path(av[0], shell->env);
-    if (binary == NULL) {
-        my_puterr(av[0]);
-        my_puterr(": Command not found.\n");
-        return (EXIT_FAILURE);
-    }
-    av[0] = my_strdup(binary);
-    free(binary);
-    status = execute_binary(av, shell->env);
-    return (status);
-}
-
-static int execute_binary(char **args, dict_t *env)
 {
     pid_t pid = 0;
     int status = 0;
 
+    (void)ac;
     pid = fork();
     if (pid < 0) {
         perror("fork");
         return (EXIT_FAILURE);
     } else if (pid == 0) {
-        execute_child(args, env);
+        execute_child(av, shell->env);
     } else {
         status = wait_parent(pid);
     }
     return (status);
 }
 
-void execute_child(char **args, dict_t *env)
+void execute_child(char **av, dict_t *env)
 {
     char **env_arr = NULL;
+    char *binary_path = NULL;
 
-    if (redirect(args) == EXIT_FAILURE)
+    if (redirect(av) == EXIT_FAILURE)
         _exit(EXIT_FAILURE);
-    env_arr = dict_to_strarr(env);
-    execve(args[0], args, env_arr);
-    if (errno == ENOEXEC) {
-        my_puterr(args[0]);
-        my_puterr(": Exec format error. Wrong Architecture.\n");
-    } else if (errno == EACCES) {
-        my_puterr(args[0]);
-        my_puterr(": Permission denied.\n");
-    } else {
-        perror(args[0]);
+    binary_path = get_binary_path(av[0], env);
+    if (binary_path == NULL) {
+        fprintf(stderr, "%s: Command not found.\n", av[0]);
+        _exit(EXIT_FAILURE);
     }
+    av[0] = my_strdup(binary_path);
+    env_arr = dict_to_strarr(env);
+    execve(av[0], av, env_arr);
+    if (errno == ENOEXEC)
+        fprintf(stderr, "%s: Exec format error. Wrong Architecture.\n", av[0]);
+    else if (errno == EACCES)
+        fprintf(stderr, "%s: Permission denied.\n", av[0]);
+    else
+        perror(av[0]);
+    free(binary_path);
     my_strarr_free(env_arr);
     _exit(EXIT_FAILURE);
 }

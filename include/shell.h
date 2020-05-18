@@ -55,8 +55,8 @@
     int run_pipes(char const *command, shell_t *shell);
     int execute_command(char const *command, shell_t *shell);
 
+    char *get_binary_path(char const *command, dict_t *env);
     int run_binary(int ac, char **av, shell_t *shell);
-    char *get_binary_path(char *command, dict_t *env);
     void execute_child(char **args, dict_t *env);
     int wait_parent(pid_t child_pid);
 
