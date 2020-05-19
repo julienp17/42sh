@@ -11,7 +11,7 @@
 
 bool is_special_char(char const c)
 {
-    char const special_chars[] = "><;|";
+    char const special_chars[] = "><;|&";
 
     for (unsigned int i = 0 ; special_chars[i] ; i++)
         if (special_chars[i] == c)
