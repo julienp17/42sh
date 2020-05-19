@@ -36,21 +36,6 @@ Test(my_alias, no_argument_no_alias)
     cr_assert_eq(status, EXIT_SUCCESS);
 }
 
-Test(my_alias, no_argument, .init = cr_redirect_stdout)
-{
-    int ac = 1;
-    char *av[] = {"alias", NULL};
-    shell_t *shell = NULL;
-    int status = 0;
-
-    shell = shell_create(NULL);
-    dict_set(&(shell->alias), "ls", my_strdup("echo bonjour"));
-    dict_set(&(shell->alias), "cd", my_strdup("cat"));
-    status = my_alias(ac, av, shell);
-    cr_assert_eq(status, EXIT_SUCCESS);
-    cr_assert_stdout_eq_str("ls\t(echo bonjour)\ncd\tcat\n");
-}
-
 Test(my_alias, one_arg_no_value, .init = cr_redirect_stdout)
 {
     int ac = 2;
