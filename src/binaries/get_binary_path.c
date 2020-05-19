@@ -13,7 +13,6 @@
 #include "shell.h"
 
 static bool is_relative_path(char const *command);
-static char **get_paths(dict_t *env);
 
 char *get_binary_path(char const *command, dict_t *env)
 {
@@ -42,7 +41,7 @@ static bool is_relative_path(char const *command)
     );
 }
 
-static char **get_paths(dict_t *env)
+char **get_paths(dict_t *env)
 {
     char *path = NULL;
     char **paths = NULL;
