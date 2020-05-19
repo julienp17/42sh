@@ -27,9 +27,10 @@ SRC_F		=	my_shell.c \
 				builtins/my_unsetenv.c \
 				builtins/my_alias.c \
 				builtins/my_unalias.c \
-				builtins/my_repeat.c \
 				builtins/my_which.c \
 				builtins/my_where.c \
+				builtins/my_repeat.c \
+				builtins/my_history.c \
 				commands/is_special_token.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \
@@ -39,6 +40,7 @@ SRC_F		=	my_shell.c \
 				prompt/reformat_command_line.c \
 				redirection/redirect.c \
 				redirection/redirect_here_document.c \
+				structures/history/history_push.c \
 				structures/shell/shell_create.c \
 				structures/shell/shell_destroy.c \
 

@@ -28,4 +28,5 @@
     int my_repeat(int ac, char **av, shell_t *shell);
     int my_which(int ac, char **av, shell_t *shell);
     int my_where(int ac, char **av, shell_t *shell);
+    int my_history(int ac, char **av, shell_t *shell);
 #endif

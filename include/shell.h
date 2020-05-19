@@ -14,9 +14,8 @@
     #include <unistd.h>
     #include <sys/types.h>
     #include "dict.h"
+    #include "history.h"
 
-    #define MY_EXIT_ERROR          -84
-    #define MY_EXIT_QUIT           92
     #define COMMAND_SEP            ';'
     #define ENV_SEP                '='
     #define PATH_SEP               ':'
@@ -32,6 +31,7 @@
         int status;
         dict_t *env;
         dict_t *alias;
+        history_t *history;
         bool exit;
     } shell_t;
 
@@ -43,7 +43,7 @@
     int my_shell(char **env);
     int my_shell_loop(shell_t *shell);
 
-    char *prompt(void);
+    char *prompt(history_t **history);
     char *reformat_command_line(char *command_line);
 
     bool syntax_is_correct(char const *command);
