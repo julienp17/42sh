@@ -18,6 +18,7 @@ int (*get_builtin(char const *command))(int, char **, shell_t *)
         {"cd", &my_cd}, {"exit", &my_exit},
         {"env", &my_env}, {"setenv", &my_setenv}, {"unsetenv", &my_unsetenv},
         {"alias", &my_alias}, {"unalias", &my_unalias},
+        {"repeat", &my_repeat},
         {"", NULL}
     };
 
