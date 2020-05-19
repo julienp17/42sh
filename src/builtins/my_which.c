@@ -35,7 +35,7 @@ static int print_command_path(char const *command, dict_t *env)
     if (path) {
         printf("%s\n", path);
     } else {
-        fprintf(stderr, "%s: Command not found.\n", command);
+        printf("%s: Command not found.\n", command);
         return (EXIT_FAILURE);
     }
     return (EXIT_SUCCESS);
