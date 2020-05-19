@@ -28,8 +28,10 @@ static int run_separators(char const *command, shell_t *shell)
     char **sep_commands = NULL;
 
     sep_commands = my_str_to_word_array(command, COMMAND_SEP);
-    for (uint i = 0 ; sep_commands[i] ; i++)
-        status = run_and_commands(sep_commands[i], shell);
+    for (uint i = 0 ; sep_commands[i] ; i++) {
+        if (syntax_is_correct(sep_commands[i]))
+            status = run_and_commands(sep_commands[i], shell);
+    }
     my_strarr_free(sep_commands);
     return (status);
 }
