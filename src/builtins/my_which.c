@@ -11,7 +11,7 @@ static int print_command_path(char const *command, dict_t *env);
 
 int my_which(int ac, char **av, shell_t *shell)
 {
-    int failed_arguments = 0;
+    int status = 0;
 
     if (ac == 1) {
         fprintf(stderr, "which: Too few arguments.\n");
@@ -19,8 +19,8 @@ int my_which(int ac, char **av, shell_t *shell)
     }
     for (unsigned int i = 1 ; av[i] ; i++)
         if (print_command_path(av[i], shell->env) == EXIT_FAILURE)
-            failed_arguments++;
-    return (failed_arguments);
+            status = EXIT_FAILURE;
+    return (status);
 }
 
 static int print_command_path(char const *command, dict_t *env)
