@@ -29,6 +29,7 @@ SRC_F		=	my_shell.c \
 				builtins/my_unalias.c \
 				builtins/my_repeat.c \
 				builtins/my_which.c \
+				builtins/my_where.c \
 				commands/is_special_token.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \

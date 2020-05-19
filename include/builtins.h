@@ -27,4 +27,5 @@
     int my_unalias(int ac, char **av, shell_t *shell);
     int my_repeat(int ac, char **av, shell_t *shell);
     int my_which(int ac, char **av, shell_t *shell);
+    int my_where(int ac, char **av, shell_t *shell);
 #endif
