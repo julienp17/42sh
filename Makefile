@@ -15,6 +15,7 @@ SRC			=	$(addprefix $(SRC_D), $(SRC_F))
 OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
 SRC_F		=	my_shell.c \
+				alias/alias_replace.c \
 				file_control/get_next_line.c \
 				binaries/run_binary.c \
 				binaries/get_binary_path.c \
@@ -25,6 +26,7 @@ SRC_F		=	my_shell.c \
 				builtins/my_setenv.c \
 				builtins/my_unsetenv.c \
 				builtins/my_alias.c \
+				builtins/my_unalias.c \
 				commands/is_special_token.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \

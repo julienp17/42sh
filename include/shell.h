@@ -55,6 +55,7 @@
     int run_command(char const *command, shell_t *shell);
     int run_commands(char const *command_line, shell_t *shell);
     int run_pipes(char const *command, shell_t *shell);
+    char *alias_replace(char const *command, dict_t *alias);
     int execute_command(char const *command, shell_t *shell);
 
     char *get_binary_path(char const *command, dict_t *env);

@@ -24,4 +24,5 @@
     int my_setenv(int ac, char **av, shell_t *shell);
     int my_unsetenv(int ac, char **av, shell_t *shell);
     int my_alias(int ac, char **av, shell_t *shell);
+    int my_unalias(int ac, char **av, shell_t *shell);
 #endif

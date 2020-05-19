@@ -10,7 +10,7 @@
 #include "shell.h"
 #include "my.h"
 
-static void print_alias(dict_t *alias);
+static void print_aliases(dict_t *alias);
 
 int my_alias(int ac, char **av, shell_t *shell)
 {
@@ -18,8 +18,7 @@ int my_alias(int ac, char **av, shell_t *shell)
     char *value = NULL;
 
     if (ac == 1) {
-        print_alias(shell->alias);
-        return (EXIT_SUCCESS);
+        print_aliases(shell->alias);
     } else if (ac == 2) {
         key = av[1];
         value = dict_get(shell->alias, key);
@@ -27,13 +26,17 @@ int my_alias(int ac, char **av, shell_t *shell)
             printf("%s\n", value);
     } else {
         key = av[1];
+        if (my_strcmp(key, "alias") == 0) {
+            fprintf(stderr, "alias: Too dangerous to alias that.\n");
+            return (EXIT_FAILURE);
+        }
         value = my_word_array_to_str(av + 2, ' ');
         dict_set(&(shell->alias), key, value);
     }
     return (EXIT_SUCCESS);
 }
 
-static void print_alias(dict_t *alias)
+static void print_aliases(dict_t *alias)
 {
     dict_t *current = NULL;
 
