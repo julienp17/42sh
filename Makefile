@@ -25,7 +25,7 @@ SRC_F		=	my_shell.c \
 				builtins/my_setenv.c \
 				builtins/my_unsetenv.c \
 				builtins/my_alias.c \
-				commands/is_special_char.c \
+				commands/is_special_token.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \
 				commands/run_command.c \
@@ -43,6 +43,8 @@ SRC_UT_D	=	tests/
 SRC_UT_F	=	test_prompt.c \
 				test_get_next_line.c \
 				test_run_binary.c \
+				test_get_binary_path.c \
+				test_syntax_is_correct.c \
 				test_reformat_command_line.c \
 				builtins/test_get_builtin.c \
 				builtins/test_my_cd.c \

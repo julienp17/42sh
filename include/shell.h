@@ -46,9 +46,11 @@
     char *prompt(void);
     char *reformat_command_line(char *command_line);
 
-    bool syntax_is_correct(char **args);
+    bool syntax_is_correct(char const *command);
     bool is_special_char(char const c);
     bool is_special_token(char const *str);
+    bool is_redirection_token(char const *str);
+    bool is_sep_token(char const *str);
 
     int run_command(char const *command, shell_t *shell);
     int run_commands(char const *command_line, shell_t *shell);
