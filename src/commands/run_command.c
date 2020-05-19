@@ -28,8 +28,6 @@ int execute_command(char const *command, shell_t *shell)
     int status = 0;
 
     av = my_str_to_word_array(command, ' ');
-    if (syntax_is_correct(av) == false)
-        return (EXIT_FAILURE);
     for (ac = 0 ; av[ac] ; ac++);
     execute = get_builtin(av[0]);
     if (execute == NULL)
