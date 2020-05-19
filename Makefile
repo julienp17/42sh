@@ -55,6 +55,7 @@ SRC_UT_F	=	test_prompt.c \
 				builtins/test_my_env.c \
 				builtins/test_my_setenv.c \
 				builtins/test_my_unsetenv.c \
+				builtins/test_my_alias.c \
 				builtins/test_my_repeat.c \
 
 INC			=	-I./include
