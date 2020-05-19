@@ -14,25 +14,28 @@ Test(my_env, too_much_arguments, .init = cr_redirect_stderr)
 {
     int ac = 2;
     char *av[] = {"env", "a", NULL};
-    dict_t *env = NULL;
     int status = 0;
 
-    status = my_env(ac, av, env);
+    status = my_env(ac, av, NULL);
     cr_assert_eq(status, EXIT_FAILURE);
-    cr_assert_stderr_eq_str("env: ‘a’: No such file or directory\n");
+    cr_assert_stderr_eq_str("env: ‘a‘: No such file or directory\n");
 }
 
 Test(my_env, basic_usage, .init = cr_redirect_stdout)
 {
     int ac = 1;
     char *av[] = {"env", NULL};
-    dict_t *env = NULL;
+    char *env[] = {
+        "EDITOR=vim",
+        "USER=julien",
+        "toto=",
+        NULL
+    };
+    shell_t *shell = NULL;
     int status = 0;
 
-    dict_set(&env, my_strdup("EDITOR"), my_strdup("vim"));
-    dict_set(&env, my_strdup("USER"), my_strdup("julien"));
-    dict_set(&env, my_strdup("toto"), NULL);
-    status = my_env(ac, av, env);
+    shell = shell_create(env);
+    status = my_env(ac, av, shell);
     cr_assert_eq(status, EXIT_SUCCESS);
     cr_assert_stdout_eq_str("EDITOR=vim\nUSER=julien\ntoto=\n");
 }
