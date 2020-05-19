@@ -50,8 +50,10 @@ static char **get_paths(dict_t *env)
     if (env == NULL) {
         path = my_strdup(DEFAULT_PATH);
     } else {
-        path = my_strdup(dict_get(env, "PATH"));
-        if (path == NULL)
+        path = dict_get(env, "PATH");
+        if (path)
+            path = my_strdup(path);
+        else
             path = my_strdup(DEFAULT_PATH);
     }
     paths = my_str_to_word_array(path, PATH_SEP);
