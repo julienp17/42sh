@@ -16,7 +16,6 @@ OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
 SRC_F		=	my_shell.c \
 				alias/alias_replace.c \
-				file_control/get_next_line.c \
 				binaries/run_binary.c \
 				binaries/get_binary_path.c \
 				builtins/get_builtin.c \
@@ -35,6 +34,8 @@ SRC_F		=	my_shell.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \
 				commands/run_command.c \
+				history/history_replace.c \
+				file_control/get_next_line.c \
 				pipes/run_pipes.c \
 				prompt/prompt.c \
 				prompt/reformat_command_line.c \

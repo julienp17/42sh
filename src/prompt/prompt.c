@@ -26,7 +26,7 @@ char *prompt(history_t **history)
     if (prompt == NULL)
         return (NULL);
     prompt = reformat_command_line(prompt);
-    if (!my_str_is_empty(prompt))
+    if (history_replace(&prompt, (*history)) == EXIT_SUCCESS)
         add_to_history(history, my_strdup(prompt));
     return (prompt);
 }
@@ -50,6 +50,8 @@ static void add_to_history(history_t **history, char const *prompt)
     time_t cur_time;
     char *timestamp = NULL;
 
+    if (my_str_is_empty(prompt))
+        return;
     cur_time = time(NULL);
     timestamp = ctime(&cur_time);
     if (timestamp == NULL) {

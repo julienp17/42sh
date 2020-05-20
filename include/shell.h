@@ -24,6 +24,7 @@
     #define OR_SEP                 "||"
     #define DEFAULT_PATH           "/bin:/usr/bin"
     #define HERE_DOC_PROMPT        "? "
+    #define HISTORY_CHAR           '!'
 
     typedef unsigned int uint;
 
@@ -45,6 +46,7 @@
 
     char *prompt(history_t **history);
     char *reformat_command_line(char *command_line);
+    int history_replace(char **prompt, history_t *history);
 
     bool syntax_is_correct(char const *command);
     bool is_special_char(char const c);
