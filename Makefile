@@ -38,6 +38,7 @@ SRC_F		=	my_shell.c \
 				file_control/get_next_line.c \
 				pipes/run_pipes.c \
 				prompt/prompt.c \
+				prompt/reformat_inhibitor.c \
 				prompt/reformat_command_line.c \
 				redirection/redirect.c \
 				redirection/redirect_here_document.c \
@@ -54,6 +55,7 @@ SRC_UT_F	=	test_prompt.c \
 				test_get_binary_path.c \
 				test_syntax_is_correct.c \
 				test_reformat_command_line.c \
+				test_reformat_inhibitor.c \
 				builtins/test_get_builtin.c \
 				builtins/test_my_cd.c \
 				builtins/test_my_exit.c \

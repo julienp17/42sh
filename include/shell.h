@@ -43,7 +43,7 @@
 
     int my_shell(char **env);
     int my_shell_loop(shell_t *shell);
-
+    char *reformat_inhibitor(char *prompt);
     char *prompt(history_t **history);
     char *reformat_command_line(char *command_line);
     int history_replace(char **prompt, history_t *history);
