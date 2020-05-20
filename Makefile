@@ -36,6 +36,8 @@ SRC_F		=	my_shell.c \
 				redirection/redirect_here_document.c \
 				structures/shell/shell_create.c \
 				structures/shell/shell_destroy.c \
+				line_formating/get_termios_infos.c \
+				line_formating/get_term_from_env.c \
 
 SRC_UT		=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT		=	$(SRC_UT:.c=.o)
@@ -55,7 +57,7 @@ INC			=	-I./include
 
 CFLAGS		=	-W -Wall -Wextra -Werror $(INC) $(LDFLAGS)
 
-LDFLAGS		=	-L./lib -lmy -ldict
+LDFLAGS		=	-L./lib -lmy -ldict -lncurses
 
 LDFLAGS_UT  =	-lcriterion --coverage
 

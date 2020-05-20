@@ -13,6 +13,7 @@
     #include <stdlib.h>
     #include <unistd.h>
     #include <sys/types.h>
+    #include <termios.h>
     #include "dict.h"
 
     #define MY_EXIT_ERROR          -84
@@ -32,6 +33,7 @@
         int status;
         dict_t *env;
         dict_t *alias;
+        struct termios term_infos;
         bool exit;
     } shell_t;
 

@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "shell.h"
+#include "line_formating.h"
 
 shell_t *shell_create(char **env)
 {
@@ -20,6 +21,7 @@ shell_t *shell_create(char **env)
     shell->status = EXIT_SUCCESS;
     shell->env = dict_from_strarr(env, ENV_SEP);
     shell->alias = NULL;
+    shell->term_infos = get_termios_infos();
     shell->exit = false;
     return (shell);
 }

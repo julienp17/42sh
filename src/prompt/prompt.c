@@ -11,6 +11,7 @@
 #include "my.h"
 #include "shell.h"
 #include "get_next_line.h"
+#include "line_formating.h"
 
 static void display_prompt(void);
 
