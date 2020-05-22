@@ -5,6 +5,7 @@
 ** Header file for my shell
 */
 
+
 #ifndef MY_SH_H_
     #define MY_SH_H_
 
@@ -15,9 +16,9 @@
     #include <sys/types.h>
     #include <termios.h>
     #include "dict.h"
+    #include "history.h"
+    #include "line_formating.h"
 
-    #define MY_EXIT_ERROR          -84
-    #define MY_EXIT_QUIT           92
     #define COMMAND_SEP            ';'
     #define ENV_SEP                '='
     #define PATH_SEP               ':'
@@ -33,7 +34,8 @@
         int status;
         dict_t *env;
         dict_t *alias;
-        struct termios term_infos;
+        terminal_t term;
+        history_t *history;
         bool exit;
     } shell_t;
 
@@ -45,20 +47,24 @@
     int my_shell(char **env);
     int my_shell_loop(shell_t *shell);
 
-    char *prompt(void);
+    char *prompt(history_t **history);
     char *reformat_command_line(char *command_line);
 
-    bool syntax_is_correct(char **args);
+    bool syntax_is_correct(char const *command);
     bool is_special_char(char const c);
     bool is_special_token(char const *str);
+    bool is_redirection_token(char const *str);
+    bool is_sep_token(char const *str);
 
     int run_command(char const *command, shell_t *shell);
     int run_commands(char const *command_line, shell_t *shell);
     int run_pipes(char const *command, shell_t *shell);
+    char *alias_replace(char const *command, dict_t *alias);
     int execute_command(char const *command, shell_t *shell);
 
+    char *get_binary_path(char const *command, dict_t *env);
+    char **get_paths(dict_t *env);
     int run_binary(int ac, char **av, shell_t *shell);
-    char *get_binary_path(char *command, dict_t *env);
     void execute_child(char **args, dict_t *env);
     int wait_parent(pid_t child_pid);
 

@@ -16,7 +16,7 @@ dict_t *dict_from_strarr(char **str_arr, char const sep)
     char *value = NULL;
     unsigned int sep_index = 0;
 
-    for (unsigned int i = 0 ; str_arr[i] ; i++) {
+    for (unsigned int i = 0 ; str_arr && str_arr[i] ; i++) {
         sep_index = my_count_until_sep(str_arr[i], sep);
         value = my_strdup(str_arr[i] + sep_index + 1);
         key = my_strdup(str_arr[i]);

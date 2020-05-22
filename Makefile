@@ -15,6 +15,7 @@ SRC			=	$(addprefix $(SRC_D), $(SRC_F))
 OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
 SRC_F		=	my_shell.c \
+				alias/alias_replace.c \
 				file_control/get_next_line.c \
 				binaries/run_binary.c \
 				binaries/get_binary_path.c \
@@ -25,7 +26,12 @@ SRC_F		=	my_shell.c \
 				builtins/my_setenv.c \
 				builtins/my_unsetenv.c \
 				builtins/my_alias.c \
-				commands/is_special_char.c \
+				builtins/my_unalias.c \
+				builtins/my_which.c \
+				builtins/my_where.c \
+				builtins/my_repeat.c \
+				builtins/my_history.c \
+				commands/is_special_token.c \
 				commands/check_syntax.c \
 				commands/run_commands.c \
 				commands/run_command.c \
@@ -34,10 +40,12 @@ SRC_F		=	my_shell.c \
 				prompt/reformat_command_line.c \
 				redirection/redirect.c \
 				redirection/redirect_here_document.c \
+				structures/history/history_push.c \
 				structures/shell/shell_create.c \
 				structures/shell/shell_destroy.c \
 				line_formating/get_termios_infos.c \
 				line_formating/get_term_from_env.c \
+				line_formating/line_formating.c \
 
 SRC_UT		=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT		=	$(SRC_UT:.c=.o)
@@ -45,6 +53,8 @@ SRC_UT_D	=	tests/
 SRC_UT_F	=	test_prompt.c \
 				test_get_next_line.c \
 				test_run_binary.c \
+				test_get_binary_path.c \
+				test_syntax_is_correct.c \
 				test_reformat_command_line.c \
 				builtins/test_get_builtin.c \
 				builtins/test_my_cd.c \
@@ -52,6 +62,8 @@ SRC_UT_F	=	test_prompt.c \
 				builtins/test_my_env.c \
 				builtins/test_my_setenv.c \
 				builtins/test_my_unsetenv.c \
+				builtins/test_my_alias.c \
+				builtins/test_my_repeat.c \
 
 INC			=	-I./include
 

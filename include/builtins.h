@@ -24,4 +24,9 @@
     int my_setenv(int ac, char **av, shell_t *shell);
     int my_unsetenv(int ac, char **av, shell_t *shell);
     int my_alias(int ac, char **av, shell_t *shell);
+    int my_unalias(int ac, char **av, shell_t *shell);
+    int my_repeat(int ac, char **av, shell_t *shell);
+    int my_which(int ac, char **av, shell_t *shell);
+    int my_where(int ac, char **av, shell_t *shell);
+    int my_history(int ac, char **av, shell_t *shell);
 #endif

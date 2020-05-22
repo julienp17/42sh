@@ -27,9 +27,6 @@ char *reformat_command_line(char *command_line)
     if (my_strlen(command_line) == expected_len)
         return (command_line);
     new_command_line = get_reformatted_command_line(command_line, expected_len);
-    if (new_command_line == NULL)
-        return (NULL);
-    new_command_line = my_clean_str(new_command_line);
     return (new_command_line);
 }
 
@@ -60,6 +57,7 @@ static char *get_reformatted_command_line(char const *command_line,
     }
     new_command_line[expected_len] = '\0';
     new_command_line = fill_new_cmd(command_line, new_command_line);
+    new_command_line = my_clean_str(new_command_line);
     return (new_command_line);
 }
 
@@ -72,10 +70,8 @@ static char *fill_new_cmd(char const *command_line, char *new_command_line)
             if (i != 0 && command_line[i - 1] != ' ')
                 new_command_line[j++] = ' ';
             new_command_line[j] = command_line[i];
-            if (command_line[i] == command_line[i + 1]) {
-                i++;
-                new_command_line[++j] = command_line[i];
-            }
+            if (command_line[i] == command_line[i + 1] && command_line[i] !=';')
+                new_command_line[++j] = command_line[i++];
             if (command_line[i + 1] != ' ')
                 new_command_line[++j] = ' ';
         } else {

@@ -22,19 +22,20 @@ int run_command(char const *command, shell_t *shell)
 
 int execute_command(char const *command, shell_t *shell)
 {
+    char *command_cpy = NULL;
     int ac = 0;
     char **av = NULL;
     int (*execute)(int, char **, shell_t *) = NULL;
     int status = 0;
 
-    av = my_str_to_word_array(command, ' ');
-    if (syntax_is_correct(av) == false)
-        return (EXIT_FAILURE);
+    command_cpy = alias_replace(command, shell->alias);
+    av = my_str_to_word_array(command_cpy, ' ');
     for (ac = 0 ; av[ac] ; ac++);
     execute = get_builtin(av[0]);
     if (execute == NULL)
         execute = &run_binary;
     status = execute(ac, av, shell);
+    free(command_cpy);
     my_strarr_free(av);
     return (status);
 }

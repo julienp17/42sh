@@ -32,7 +32,7 @@ int my_shell_loop(shell_t *shell)
     char *command_line = NULL;
     int status = 0;
 
-    command_line = prompt();
+    command_line = prompt(&(shell->history));
     if (command_line == NULL) {
         shell->exit = true;
         return (shell->status);

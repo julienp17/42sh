@@ -11,34 +11,28 @@
 #include "dict.h"
 #include "my.h"
 
-Test(run_binary, not_exising, .init = cr_redirect_stderr)
+Test(run_binary, not_exising_null_env, .init = cr_redirect_stderr)
 {
     int ac = 1;
     char *av[] = {"a", NULL};
-    dict_t *env = NULL;
-    char key[] = "PATH";
-    char value[] = "/usr/bin:/bin";
+    shell_t *shell = NULL;
     int status = 0;
 
-    dict_set(&env, key, my_strdup(value));
-    status = run_binary(ac, av, env);
+    shell = shell_create(NULL);
+    status = run_binary(ac, av, shell);
     cr_assert_eq(status, EXIT_FAILURE);
     cr_assert_stderr_eq_str("a: Command not found.\n");
-    dict_destroy(env);
 }
 
-Test(run_binary, echo_hello, .init = cr_redirect_stdout)
+Test(run_binary, echo_hello_null_env, .init = cr_redirect_stdout)
 {
     int ac = 2;
     char *av[] = {"echo", "hello", NULL};
-    dict_t *env = NULL;
-    char key[] = "PATH";
-    char value[] = "/usr/bin:/bin";
+    shell_t *shell = NULL;
     int status = 0;
 
-    dict_set(&env, key, my_strdup(value));
-    status = run_binary(ac, av, env);
+    shell = shell_create(NULL);
+    status = run_binary(ac, av, shell);
     cr_assert_eq(status, EXIT_SUCCESS);
     cr_assert_stdout_eq_str("hello\n");
-    dict_destroy(env);
 }

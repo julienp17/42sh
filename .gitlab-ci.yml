@@ -1,0 +1,12 @@
+image: epitechcontent/epitest-docker
+
+compile:
+  script:
+    - make
+    - make re
+
+unit_tests:
+  allow_failure: true
+  script:
+    - make tests_run
+    - gcovr -e tests/

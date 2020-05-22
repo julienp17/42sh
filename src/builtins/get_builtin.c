@@ -17,7 +17,9 @@ int (*get_builtin(char const *command))(int, char **, shell_t *)
     builtin_t builtins[] = {
         {"cd", &my_cd}, {"exit", &my_exit},
         {"env", &my_env}, {"setenv", &my_setenv}, {"unsetenv", &my_unsetenv},
-        {"alias", &my_alias},
+        {"alias", &my_alias}, {"unalias", &my_unalias},
+        {"which", &my_which}, {"where", &my_where},
+        {"repeat", &my_repeat}, {"history", &my_history},
         {"", NULL}
     };
 

@@ -62,3 +62,18 @@ Test(reformat_command_line, special_characters2)
     command_line = reformat_command_line(my_strdup(command_line));
     cr_assert_str_eq(command_line, expected);
 }
+
+Test(reformat_command_line, long_command)
+{
+    char const expected[] = { \
+        "cd ; /etc/hosts od -c | grep xx | wc >> /tmp/z -l ; cd -" \
+        " && echo \"OK\" || echo \"KO\""
+    };
+    char *command_line = { \
+        " \t  cd;  /etc/hosts\t  od -c|grep  xx |wc >>/tmp/z\t-l; cd -" \
+        "&&echo \"OK\"  ||   echo \"KO\"  "
+    };
+
+    command_line = reformat_command_line(my_strdup(command_line));
+    cr_assert_str_eq(command_line, expected);
+}

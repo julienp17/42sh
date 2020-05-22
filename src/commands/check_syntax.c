@@ -11,14 +11,20 @@
 #include "shell.h"
 
 static bool redirection_symbols_are_correct(char **args);
-static bool pipes_are_correct(char **args);
-static bool pipe_is_incorrect(char **args, int i);
+static bool tokens_are_correct(char **tokens);
+static bool token_is_incorrect(char **tokens, int i);
 
-bool syntax_is_correct(char **args)
+bool syntax_is_correct(char const *command)
 {
-    if (!pipes_are_correct(args))
+    char **tokens = NULL;
+
+    tokens = my_str_to_word_array(command, ' ');
+    if (tokens_are_correct(tokens) == false)
         return (false);
-    return (redirection_symbols_are_correct(args));
+    if (redirection_symbols_are_correct(tokens) == false)
+        return (false);
+    my_strarr_free(tokens);
+    return (true);
 }
 
 static bool redirection_symbols_are_correct(char **args)
@@ -45,10 +51,10 @@ static bool redirection_symbols_are_correct(char **args)
     return (true);
 }
 
-static bool pipes_are_correct(char **args)
+static bool tokens_are_correct(char **args)
 {
     for (int i = 0 ; args[i] ; i++) {
-        if (my_strcmp(args[i], "|") == 0 && pipe_is_incorrect(args, i)) {
+        if (is_sep_token(args[i]) && token_is_incorrect(args, i)) {
             my_puterr("Invalid null command.\n");
             return (false);
         }
@@ -56,7 +62,7 @@ static bool pipes_are_correct(char **args)
     return (true);
 }
 
-static bool pipe_is_incorrect(char **args, int i)
+static bool token_is_incorrect(char **args, int i)
 {
     return (
         i == 0
