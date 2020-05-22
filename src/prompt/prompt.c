@@ -21,13 +21,10 @@ static int display_prompt(void);
 char *prompt(history_t **history)
 {
     char *prompt = NULL;
-    int prompt_size = 0;
 
     if (isatty(STDIN_FILENO))
         display_prompt();
-    prompt = line_formating(prompt_size);
-    //prompt = get_next_line(STDIN_FILENO);
-    printf("DEBUG: %s\n", prompt);
+    prompt = line_formating();
     if (prompt == NULL)
         return (NULL);
     prompt = reformat_command_line(prompt);

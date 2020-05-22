@@ -24,6 +24,6 @@ typedef struct terminal
 
 terminal_t get_termios_infos(dict_t *env);
 char *get_term_from_env(dict_t *env);
-char *line_formating(int prompt_size);
+char *line_formating(void);
 
 #endif /* !LINE_FORMATING_H_ */
