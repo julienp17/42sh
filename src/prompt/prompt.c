@@ -25,6 +25,7 @@ char *prompt(history_t **history)
     prompt = get_next_line(STDIN_FILENO);
     if (prompt == NULL)
         return (NULL);
+    prompt = reformat_inhibitor(prompt);
     prompt = reformat_command_line(prompt);
     if (history_replace(&prompt, (*history)) == EXIT_SUCCESS)
         add_to_history(history, my_strdup(prompt));
